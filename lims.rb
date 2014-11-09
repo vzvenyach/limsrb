@@ -16,7 +16,7 @@ def get_measure (measure)
 	  req.headers['Content-Type'] = 'application/json'
 	  req.body = body.to_json
 	end
-	return response.body
+	return JSON.parse(response.body)['d']
 end
 
 def get_laws (count)
