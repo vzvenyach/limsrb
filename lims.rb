@@ -23,6 +23,22 @@ def get_laws (count)
 	pass
 end
 
-def search ()
-	pass
+def search (keyword:'', measure_type: '', member_id: '')
+	
+	search_string = "|" + measure_type + "|||20|" + member_id + "||||||100|" + keyword + "|||0|false"
+
+	conn = Faraday.new(:url => 'http://lims.dccouncil.us/_layouts/15/uploader/AdminProxy.aspx/GetPublicAdvancedSearch') do |faraday|
+	  faraday.request  :url_encoded             # form-encode POST params
+	  faraday.response :logger                  # log requests to STDOUT
+	  faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+	end
+
+	body = {:inputJSON => search_string }
+
+	response = conn.post do |req|
+	  req.url 'http://lims.dccouncil.us/_layouts/15/uploader/AdminProxy.aspx/GetPublicAdvancedSearch'
+	  req.headers['Content-Type'] = 'application/json'
+	  req.body = body.to_json
+	end
+	return JSON.parse(response.body)['d']
 end
