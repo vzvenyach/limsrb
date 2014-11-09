@@ -23,9 +23,9 @@ def get_laws (count)
 	pass
 end
 
-def search (keyword:'', measure_type: '', member_id: '')
+def search (q:'', measure_type: '', member_id: '')
 	
-	search_string = "|" + measure_type + "|||20|" + member_id + "||||||100|" + keyword + "|||0|false"
+	search_string = "|" + measure_type + "|||20|" + member_id + "|||||||" + q + "|||0|false"
 
 	conn = Faraday.new(:url => 'http://lims.dccouncil.us/_layouts/15/uploader/AdminProxy.aspx/GetPublicAdvancedSearch') do |faraday|
 	  faraday.request  :url_encoded             # form-encode POST params

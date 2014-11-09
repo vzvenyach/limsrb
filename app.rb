@@ -22,7 +22,9 @@ class App < Sinatra::Base
 
   get '/search' do
   	content_type :json
-  	JSON.parse(search(keyword: params[:q], measure_type: params[:measure_type])).to_json
+  	q = params[:q] || ""
+  	measure_type = params[:measure_type] || ""
+  	JSON.parse(search(q: q, measure_type: measure_type)).to_json
   end
 
   run! if app_file == $0
