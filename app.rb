@@ -11,6 +11,10 @@ class App < Sinatra::Base
   # register Sinatra::Contrib
   # register Sinatra::ActiveRecordExtension
 
+  before do
+    response['Access-Control-Allow-Origin'] = "*"
+  end
+
   get '/' do
     "Hello World"
   end
