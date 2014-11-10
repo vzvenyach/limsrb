@@ -20,6 +20,12 @@ class App < Sinatra::Base
   	JSON.parse(get_measure(params["measure"])).to_json
   end
 
+  get '/laws' do
+  	content_type :json
+  	count = params[:count] || "10"
+  	JSON.parse(get_laws(count)).to_json
+  end
+
   get '/search' do
   	content_type :json
   	q = params[:q] || ""
