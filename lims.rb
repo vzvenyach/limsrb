@@ -36,9 +36,13 @@ def get_laws (count)
 	return JSON.parse(response.body)['d']
 end
 
-def search (q:'', measure_type: '', member_id: '')
+def get_file()
+	pass
+end
+
+def search (q:'', measure_type: '', member_id: '', committee_id: '', status: '0')
 	
-	search_string = "|" + measure_type + "|||20|" + member_id + "|||||||" + q + "|||0|false"
+	search_string = "|" + measure_type + "|||20|" + member_id + "||" + committee_id.to_s + "|||||" + q + "|||" + status + "|false"
 
 	conn = Faraday.new(:url => 'http://lims.dccouncil.us/_layouts/15/uploader/AdminProxy.aspx/GetPublicAdvancedSearch') do |faraday|
 	  faraday.request  :url_encoded             # form-encode POST params

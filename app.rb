@@ -24,6 +24,13 @@ class App < Sinatra::Base
   	JSON.parse(get_measure(params["measure"])).to_json
   end
 
+  get '/committees' do
+    content_type :json
+    committee_id = params[:committee_id] || ""
+    status = params[:status] || "40"
+    JSON.parse(search(committee_id: committee_id, status: status)).to_json
+  end
+
   get '/laws' do
   	content_type :json
   	count = params[:count] || "10"
@@ -34,7 +41,8 @@ class App < Sinatra::Base
   	content_type :json
   	q = params[:q] || ""
   	measure_type = params[:measure_type] || ""
-  	JSON.parse(search(q: q, measure_type: measure_type)).to_json
+    committee_id = params[:committee_id] || ""
+  	JSON.parse(search(q: q, measure_type: measure_type, committee_id: committee_id)).to_json
   end
 
   run! if app_file == $0
