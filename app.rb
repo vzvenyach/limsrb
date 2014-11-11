@@ -42,7 +42,8 @@ class App < Sinatra::Base
   	q = params[:q] || ""
   	measure_type = params[:measure_type] || ""
     committee_id = params[:committee_id] || ""
-  	JSON.parse(search(q: q, measure_type: measure_type, committee_id: committee_id)).to_json
+    status = params[:status] || "0"
+  	JSON.parse(search(q: q, measure_type: measure_type, committee_id: committee_id, status: status)).to_json
   end
 
   run! if app_file == $0

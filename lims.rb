@@ -42,7 +42,7 @@ end
 
 def search (q:'', measure_type: '', member_id: '', committee_id: '', status: '0')
 	
-	search_string = "|" + measure_type + "|||20|" + member_id + "||" + committee_id.to_s + "|||||" + q + "|||" + status + "|false"
+	search_string = "|" + measure_type + "|||20|" + member_id + "||" + committee_id.to_s + "||||100|" + q + "|||" + status + "|false"
 
 	conn = Faraday.new(:url => 'http://lims.dccouncil.us/_layouts/15/uploader/AdminProxy.aspx/GetPublicAdvancedSearch') do |faraday|
 	  faraday.request  :url_encoded             # form-encode POST params
