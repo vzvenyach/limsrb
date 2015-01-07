@@ -43,7 +43,9 @@ class App < Sinatra::Base
   	measure_type = params[:measure_type] || ""
     committee_id = params[:committee_id] || ""
     status = params[:status] || "0"
-  	JSON.parse(search(q: q, measure_type: measure_type, committee_id: committee_id, status: status)).to_json
+    start_date = params[:start_date] || ""
+    council_period = params[:council_period] || "21"
+  	JSON.parse(search(q: q, measure_type: measure_type, committee_id: committee_id, status: status, start_date: start_date, council_period: council_period)).to_json
   end
 
   run! if app_file == $0

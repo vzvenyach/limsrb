@@ -1,5 +1,6 @@
 require "faraday"
 require 'json'
+require 'pry'
 
 def get_measure (measure)
 
@@ -40,9 +41,10 @@ def get_file()
 	pass
 end
 
-def search (q:'', measure_type: '', member_id: '', committee_id: '', status: '0')
+def search (q:'', measure_type: '', member_id: '', committee_id: '', status: '0', start_date: '', council_period: '20')
 	
-	search_string = "|" + measure_type + "|||20|" + member_id + "||" + committee_id.to_s + "||||100|" + q + "|||" + status + "|false"
+	search_string = "|" + measure_type + "|||" + council_period + "|" + member_id + "||" + committee_id.to_s + "||" + start_date + "||100|" + q + "|||" + status + "|false"
+
 
 	conn = Faraday.new(:url => 'http://lims.dccouncil.us/_layouts/15/uploader/AdminProxy.aspx/GetPublicAdvancedSearch') do |faraday|
 	  faraday.request  :url_encoded             # form-encode POST params
