@@ -1,6 +1,5 @@
 require "faraday"
 require 'json'
-require 'pry'
 
 def get_measure (measure)
 
