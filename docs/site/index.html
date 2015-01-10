@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Documentation for the OpenLIMS API">
+        <meta name="author" content="V. David Zvenyach">
+        
+        <link rel="shortcut icon" href="./img/favicon.ico">
+
+        <title>OpenLIMS</title>
+
+        <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="./css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="./css/highlight.css">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body class="homepage">
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href=".">OpenLIMS</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+
+            
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                
+                <li>
+                    <a href="https://github.com/vzvenyach/limsrb">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#openlims">OpenLIMS</a></li>
+        
+            <li><a href="#about">About</a></li>
+        
+    
+        <li class="main "><a href="#usage">Usage</a></li>
+        
+            <li><a href="#measure">Measure</a></li>
+        
+            <li><a href="#committees">Committees</a></li>
+        
+            <li><a href="#laws">Laws</a></li>
+        
+            <li><a href="#search">Search</a></li>
+        
+    
+        <li class="main "><a href="#parameter-details">Parameter Details</a></li>
+        
+            <li><a href="#member_id">member_id</a></li>
+        
+            <li><a href="#committee_id">committee_id</a></li>
+        
+            <li><a href="#status">status</a></li>
+        
+            <li><a href="#measure_type">measure_type</a></li>
+        
+    
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="openlims">OpenLIMS</h1>
+<h2 id="about">About</h2>
+<p>The main source of information for the legislative activities of the Council of the District of Columbia is the Legislative Information Management System (LIMS). LIMS is available at <a href="http://lims.dccouncil.us">http://lims.dccouncil.us</a>.</p>
+<p>In 2013, the Council upgraded the LIMS interface, which was built on an undocumented REST API. The OpenLIMS API is a simple way of accessing that REST API, so that other sites can access information directly from LIMS.</p>
+<p>It has been used to create an <a href="https://esq.io/lims-rss.xml">RSS feed for new Council legislation</a>, a treemap of the number of measures referred to a <a href="http://code.esq.io/limsdash/committees.html">committee</a>, and a listing of bills referred to the <a href="http://chairmanmendelson.com/cow/committee-legislation">Committee of the Whole</a>. </p>
+<p>The OpenLIMS API is built with Ruby and Sinatra and is hosted on Heroku. The source code is <a href="https://github.com/vzvenyach/limsrb">hosted on GitHub</a>. If you have any questions, please <a href="https://github.com/vzvenyach/limsrb/issues">open up an issue</a>.</p>
+<p><a href=".//usage/">Get started with the OpenLIMS API.</a></p>
+<h1 id="usage">Usage</h1>
+<p>To access the OpenLIMS API, go to <a href="https://openlims.herokuapp.com">https://openlims.herokuapp.com</a>. There are currently 4 supported API endpoints:</p>
+<ol>
+<li><code>measure</code></li>
+<li><code>committees</code></li>
+<li><code>laws</code></li>
+<li><code>search</code></li>
+</ol>
+<p>Each endpoint is accessible only with a <code>GET</code> request and will respond with a json object.</p>
+<h2 id="measure">Measure</h2>
+<h3 id="parameters">Parameters</h3>
+<p><code>/measure/:measure</code></p>
+<h3 id="example">Example</h3>
+<p><a href="https://openlims.herokuapp.com/measure/B20-0461">https://openlims.herokuapp.com/measure/B20-0461</a></p>
+<h3 id="description">Description</h3>
+<p>Returns metadata associated with the measure.</p>
+<h2 id="committees">Committees</h2>
+<h3 id="parameters_1">Parameters</h3>
+<p><code>/committees?committee_id=&lt;id&gt;&amp;status=&lt;status&gt;</code></p>
+<h3 id="example_1">Example</h3>
+<p><a href="https://openlims.herokuapp.com/committees?committee_id=204&amp;status=0">https://openlims.herokuapp.com/committees?committee_id=204&amp;status=0</a></p>
+<h3 id="description_1">Description</h3>
+<p>Returns all of the measures in a committee based on the <code>committee_id</code> and <code>status</code> parameters. A listing of parameter values is below.</p>
+<h2 id="laws">Laws</h2>
+<h3 id="parameters_2">Parameters</h3>
+<p><code>/laws?count=&lt;count&gt;</code></p>
+<h3 id="example_2">Example</h3>
+<p><a href="https://openlims.herokuapp.com/laws?count=20">https://openlims.herokuapp.com/laws?count=20</a></p>
+<h3 id="description_2">Description</h3>
+<p>Gets a list of the most recent acts that are law.</p>
+<h2 id="search">Search</h2>
+<h3 id="parameters_3">Parameters</h3>
+<p><code>/search?q=&lt;q&gt;&amp;measure_type=&lt;measure_type&gt;&amp;status=&lt;status&gt;&amp;start_date=&lt;start_date&gt;&amp;council_period=&lt;council_period&gt;</code></p>
+<h3 id="example_3">Example</h3>
+<p><a href="https://openlims.herokuapp.com/search?q=technology&amp;measure_type=1&amp;status=0&amp;start_date=1/1/2015">https://openlims.herokuapp.com/search?q=technology&amp;measure_type=1&amp;status=0&amp;start_date=1/1/2015</a></p>
+<h3 id="description_3">Description</h3>
+<p>Allows you to do a full-text search against the LIMS database using the <code>q</code> parameter and to filter based on the other parameters. A listing of parameter values is available below.</p>
+<h1 id="parameter-details">Parameter Details</h1>
+<h3 id="member_id">member_id</h3>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>councilmember</th>
+<th>council period</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>230</td>
+<td>Yvette Alexander</td>
+<td>21</td>
+</tr>
+<tr>
+<td>239</td>
+<td>Charles Allen</td>
+<td>21</td>
+</tr>
+<tr>
+<td>231</td>
+<td>Anita Bonds</td>
+<td>21</td>
+</tr>
+<tr>
+<td>232</td>
+<td>Mary Cheh</td>
+<td>21</td>
+</tr>
+<tr>
+<td>233</td>
+<td>Jack Evans</td>
+<td>21</td>
+</tr>
+<tr>
+<td>234</td>
+<td>David Grosso</td>
+<td>21</td>
+</tr>
+<tr>
+<td>235</td>
+<td>Kenyan McDuffie</td>
+<td>21</td>
+</tr>
+<tr>
+<td>237</td>
+<td>Phil Mendelson</td>
+<td>21</td>
+</tr>
+<tr>
+<td>240</td>
+<td>Brianne Nadeau</td>
+<td>21</td>
+</tr>
+<tr>
+<td>236</td>
+<td>Vincent Orange</td>
+<td>21</td>
+</tr>
+<tr>
+<td>238</td>
+<td>Elissa Silverman</td>
+<td>21</td>
+</tr>
+</tbody>
+</table>
+<h3 id="committee_id">committee_id</h3>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>committee_name</th>
+<th>council period</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>191</td>
+<td>Business, Consumer, and Regulatory Affairs</td>
+<td>20</td>
+</tr>
+<tr>
+<td>192</td>
+<td>Committee of the Whole</td>
+<td>20</td>
+</tr>
+<tr>
+<td>193</td>
+<td>Economic Development</td>
+<td>20</td>
+</tr>
+<tr>
+<td>194</td>
+<td>Education</td>
+<td>20</td>
+</tr>
+<tr>
+<td>195</td>
+<td>Finance and Revenue</td>
+<td>20</td>
+</tr>
+<tr>
+<td>196</td>
+<td>Government Operations</td>
+<td>20</td>
+</tr>
+<tr>
+<td>197</td>
+<td>Health</td>
+<td>20</td>
+</tr>
+<tr>
+<td>198</td>
+<td>Human Services</td>
+<td>20</td>
+</tr>
+<tr>
+<td>199</td>
+<td>Judiciary and Public Safety</td>
+<td>20</td>
+</tr>
+<tr>
+<td>200</td>
+<td>Retained by the Council</td>
+<td>20</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Transportation and the Environment</td>
+<td>20</td>
+</tr>
+<tr>
+<td>202</td>
+<td>Retained by the Council</td>
+<td>20</td>
+</tr>
+<tr>
+<td>203</td>
+<td>Business, Consumer, and Regulatory Affairs</td>
+<td>21</td>
+</tr>
+<tr>
+<td>204</td>
+<td>Committee of the Whole</td>
+<td>21</td>
+</tr>
+<tr>
+<td>205</td>
+<td>Education</td>
+<td>21</td>
+</tr>
+<tr>
+<td>206</td>
+<td>Finance and Revenue</td>
+<td>21</td>
+</tr>
+<tr>
+<td>207</td>
+<td>Health and Human Services</td>
+<td>21</td>
+</tr>
+<tr>
+<td>208</td>
+<td>Housing and Community Development</td>
+<td>21</td>
+</tr>
+<tr>
+<td>209</td>
+<td>Judiciary</td>
+<td>21</td>
+</tr>
+<tr>
+<td>210</td>
+<td>Retained</td>
+<td>21</td>
+</tr>
+</tbody>
+</table>
+<h3 id="status">status</h3>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>status description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Any status</td>
+</tr>
+<tr>
+<td>10</td>
+<td>New</td>
+</tr>
+<tr>
+<td>40</td>
+<td>Under Council Review</td>
+</tr>
+<tr>
+<td>50</td>
+<td>Under Mayoral Review</td>
+</tr>
+<tr>
+<td>60</td>
+<td>Enacted</td>
+</tr>
+<tr>
+<td>70</td>
+<td>Under Congressional Review</td>
+</tr>
+<tr>
+<td>80</td>
+<td>Vetoed</td>
+</tr>
+<tr>
+<td>90</td>
+<td>Deemed Approved</td>
+</tr>
+<tr>
+<td>100</td>
+<td>Deemed Disapproved</td>
+</tr>
+<tr>
+<td>110</td>
+<td>Approved</td>
+</tr>
+<tr>
+<td>120</td>
+<td>Disapproved</td>
+</tr>
+<tr>
+<td>130</td>
+<td>Official Law</td>
+</tr>
+<tr>
+<td>140</td>
+<td>Withdrawn</td>
+</tr>
+</tbody>
+</table>
+<h3 id="measure_type">measure_type</h3>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Bill</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Resolution</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Contract</td>
+</tr>
+</tbody>
+</table>
+</div>
+            
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="./js/bootstrap-3.0.3.min.js"></script>
+        <script src="./js/prettify-1.0.min.js"></script>
+        <script src="./js/highlight.pack.js"></script>
+        <script src="./js/base.js"></script>
+    </body>
+</html>

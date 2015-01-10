@@ -1,0 +1,5 @@
+site_name: OpenLIMS
+repo_url: https://github.com/vzvenyach/limsrb
+site_description: Documentation for the OpenLIMS API
+site_author: V. David Zvenyach
+site_dir: ../public

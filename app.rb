@@ -16,7 +16,7 @@ class App < Sinatra::Base
   end
 
   get '/' do
-    "Hello World"
+    redirect('index.html')
   end
   
   get '/measure/:measure' do
