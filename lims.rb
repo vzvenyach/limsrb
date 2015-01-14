@@ -40,7 +40,7 @@ def get_file()
 	pass
 end
 
-def search (q:'', measure_type: '', member_id: '', committee_id: '', status: '0', start_date: '', council_period: '20')
+def search (q:'', measure_type: '', member_id: '', committee_id: '', status: '0', start_date: '', council_period: '')
 	
 	search_string = "|" + measure_type + "|||" + council_period + "|" + member_id + "||" + committee_id.to_s + "||" + start_date + "||100|" + q + "|||" + status + "|false"
 

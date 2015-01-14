@@ -26,9 +26,11 @@ class App < Sinatra::Base
 
   get '/committees' do
     content_type :json
+    measure_type = params[:measure_type] || "1"
     committee_id = params[:committee_id] || ""
     status = params[:status] || "40"
-    JSON.parse(search(committee_id: committee_id, status: status)).to_json
+    council_period = params[:council_period] || "21"
+    JSON.parse(search(committee_id: committee_id, council_period: council_period, measure_type: measure_type, status: status)).to_json
   end
 
   get '/laws' do
