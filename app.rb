@@ -5,11 +5,25 @@ require 'sinatra/contrib/all'
 require 'github/markup'
 require 'redcarpet'
 require 'json'
+require 'mongo'
 require './lims'
+
+include Mongo
 
 class App < Sinatra::Base
   # register Sinatra::Contrib
   # register Sinatra::ActiveRecordExtension
+
+  mongoHost = ENV.fetch('MONGOHOST', 'localhost')
+  mongoPort = ENV.fetch('MONGOPORT', 27017)
+  mongoDB = ENV.fetch('MONGODB', 'limsydb')
+  mongoColl = ENV.fetch('MONGOCOLLECTION', 'measures')
+  mongoUser = ENV.fetch('MONGOUSER', '')
+  mongoPwd = ENV.fetch('MONGOPWD', '')
+
+  conn = MongoClient.new(mongoHost, mongoPort)
+  db = conn[mongoDB]
+  auth = db.authenticate(mongoUser, mongoPwd)
 
   before do
     response['Access-Control-Allow-Origin'] = "*"
@@ -20,8 +34,14 @@ class App < Sinatra::Base
   end
   
   get '/measure/:measure' do
-  	content_type :json
-  	JSON.parse(get_measure(params["measure"])).to_json
+     
+    if params["measure"].split('-')[0][1,2].to_i < 20
+      # If we're here, that means we're using Mongo to output information
+      return db[mongoColl].find_one(:LegislationNo => params["measure"]).to_json
+    else
+    	content_type :json
+    	JSON.parse(get_measure(params["measure"])).to_json
+    end
   end
 
   get '/committees' do

@@ -1,4 +1,4 @@
-ruby '2.0.0'
+ruby '2.1.4'
 source "http://rubygems.org"
 gem 'faraday'
 gem 'sinatra'
@@ -8,3 +8,5 @@ gem 'sinatra-activerecord'
 gem 'github-markup'
 gem 'redcarpet'
 gem 'rerun'
+gem 'mongo'
+gem 'bson_ext'
