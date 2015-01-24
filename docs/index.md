@@ -19,7 +19,7 @@ To access the OpenLIMS API, go to <https://openlims.herokuapp.com>. There are cu
 3.  `laws`
 4.  `search`
 
-Each endpoint is accessible only with a `GET` request and will respond with a json object.
+Each endpoint is accessible only with a `GET` request and will respond with a json object. The `/measure` endpoint is supported from Council Period 8 through the present. As of right now, that is the only endpoint with data from before Council Period 20.
 
 ## Measure
 
