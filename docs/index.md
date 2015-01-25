@@ -71,7 +71,7 @@ Gets a list of the most recent acts that are law.
 
 ### Example
 
-<https://openlims.herokuapp.com/search?q=technology&measure_type=1&status=0&start_date=1/1/2015>
+<https://openlims.herokuapp.com/search?q=technology&measure_type=1&status=0&start_date=1/1/2015&council_period=21>
 
 ### Description
 
