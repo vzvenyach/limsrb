@@ -7,6 +7,7 @@ require 'redcarpet'
 require 'json'
 require 'mongo'
 require './lims'
+require 'pry'
 
 include Mongo
 
