@@ -35,7 +35,6 @@ class App < Sinatra::Base
   end
   
   get '/measure/:measure' do
-     
     if params["measure"].split('-')[0][1,2].to_i < 20
       # If we're here, that means we're using Mongo to output information
       return db[mongoColl].find_one(:LegislationNo => params["measure"]).to_json
