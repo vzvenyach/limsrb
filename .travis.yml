@@ -1,3 +1,10 @@
 language: ruby
 rvm:
-  - 2.1.4
+- 2.1.4
+deploy:
+  provider: heroku
+  api_key:
+    secure: cH1t3MMWoUgHSvaYKQABBYm5hwgPTPP8VZJ0gImmLVI3Y7FlRdnxJLybwJPs8V6d2cUx+28sOtqFbe/afi96ymIrxX/B1mau05g5Q4dlpXyjgzN9jNSvTfmilmz5a8kS94xrN3mQXbodZtQkqrvHwBnVaeRBS6m71R+Nuurh1sk=
+  app: openlims
+  on:
+    repo: vzvenyach/limsrb
